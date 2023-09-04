@@ -29,11 +29,11 @@ kmeans = KMeans(n_clusters=num_clusters, random_state=0)
 data['Cluster'] = kmeans.fit_predict(data_scaled)
 
 
-# In[11]:
+# In[16]:
 
 
 # Visualization
-st.title("Wine Clustering Based on Alcohol & Malic Acid")
+st.title("Wine Clustering")
 st.sidebar.subheader("Clustering Parameters")
 st.sidebar.write("Number of Clusters:", num_clusters)
 
@@ -41,20 +41,16 @@ st.sidebar.write("Number of Clusters:", num_clusters)
 x_axis = st.sidebar.selectbox("Select X-Axis Feature", data.columns[:-1])
 y_axis = st.sidebar.selectbox("Select Y-Axis Feature", data.columns[:-1])
 
-
-# In[12]:
-
-
 # Scatter plot with clusters
-plt.figure(figsize=(10, 6))
-sns.scatterplot(data=data, x=x_axis, y=y_axis, hue='Cluster', palette='viridis', s=100)
-plt.xlabel(x_axis)
-plt.ylabel(y_axis)
-plt.title(f'Clustering based on {x_axis} vs {y_axis}')
-st.pyplot()
+fig, ax = plt.subplots(figsize=(10, 6))
+sns.scatterplot(data=data, x=x_axis, y=y_axis, hue='Cluster', palette='viridis', s=100, ax=ax)
+ax.set_xlabel(x_axis)
+ax.set_ylabel(y_axis)
+ax.set_title(f'Clustering based on {x_axis} vs {y_axis}')
+st.pyplot(fig)
 
 
-# In[8]:
+# In[17]:
 
 
 # Streamlit App
